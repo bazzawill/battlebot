@@ -1,0 +1,179 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="eO:+2q#/%0d$]}?.4n$3">distToOb</variable>
+  </variables>
+  <block type="forever" x="0" y="0">
+    <statement name="HANDLER">
+      <block type="variables_set">
+        <field name="VAR" id="eO:+2q#/%0d$]}?.4n$3" variabletype="">distToOb</field>
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="sonarGetDistance">
+            <field name="this">sensors.ultrasonic3</field>
+          </block>
+        </value>
+        <next>
+          <block type="screenShowValue">
+            <value name="name">
+              <shadow type="text">
+                <field name="TEXT">US</field>
+              </shadow>
+            </value>
+            <value name="text">
+              <block type="variables_get">
+                <field name="VAR" id="eO:+2q#/%0d$]}?.4n$3" variabletype="">distToOb</field>
+              </block>
+            </value>
+            <value name="line">
+              <shadow type="math_number">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="controls_if">
+                <value name="IF0">
+                  <shadow type="logic_boolean">
+                    <field name="BOOL">TRUE</field>
+                  </shadow>
+                  <block type="colorisColorDetectedDetected">
+                    <field name="this">sensors.color1</field>
+                    <value name="color">
+                      <shadow type="colorEnumPicker">
+                        <field name="color">ColorSensorColor.Black</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="motorPairSteer">
+                    <mutation _expanded="2" _input_init="true"></mutation>
+                    <field name="chassis">motors.largeBC</field>
+                    <field name="unit">MoveUnit.Rotations</field>
+                    <value name="turnRatio">
+                      <shadow type="motorTurnRatioPicker"></shadow>
+                      <block type="math_number">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <value name="speed">
+                      <shadow type="motorSpeedPicker">
+                        <field name="speed">-50</field>
+                      </shadow>
+                    </value>
+                    <value name="value">
+                      <shadow type="math_number">
+                        <field name="NUM">0.5</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="motorPairSteer">
+                        <mutation _expanded="2" _input_init="true"></mutation>
+                        <field name="chassis">motors.largeBC</field>
+                        <field name="unit">MoveUnit.Degrees</field>
+                        <value name="turnRatio">
+                          <shadow type="motorTurnRatioPicker"></shadow>
+                          <block type="math_number">
+                            <field name="NUM">200</field>
+                          </block>
+                        </value>
+                        <value name="speed">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">50</field>
+                          </shadow>
+                        </value>
+                        <value name="value">
+                          <block type="device_random">
+                            <value name="min">
+                              <shadow type="math_number">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <value name="limit">
+                              <shadow type="math_number">
+                                <field name="NUM">360</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="motorPairSteer">
+                    <mutation _expanded="0" _input_init="false"></mutation>
+                    <field name="chassis">motors.largeBC</field>
+                    <value name="turnRatio">
+                      <shadow type="motorTurnRatioPicker"></shadow>
+                      <block type="math_number">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <value name="speed">
+                      <shadow type="motorSpeedPicker"></shadow>
+                      <block type="math_arithmetic">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A">
+                          <shadow type="math_number">
+                            <field name="NUM">50</field>
+                          </shadow>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number">
+                            <field name="NUM">0</field>
+                          </shadow>
+                          <block type="math_arithmetic">
+                            <field name="OP">DIVIDE</field>
+                            <value name="A">
+                              <shadow type="math_number">
+                                <field name="NUM">0</field>
+                              </shadow>
+                              <block type="variables_get">
+                                <field name="VAR" id="eO:+2q#/%0d$]}?.4n$3" variabletype="">distToOb</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number">
+                                <field name="NUM">255</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="math_js_round" disabled="true" x="980" y="0">
+    <field name="OP">floor</field>
+    <value name="ARG0">
+      <shadow type="math_number">
+        <field name="NUM">0</field>
+      </shadow>
+      <block type="math_arithmetic">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="typescript_expression" editable="false">
+            <field name="EXPRESSION">Math.random()</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">360</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+  </block>
+</xml>
